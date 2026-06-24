@@ -1,26 +1,127 @@
 @import "tailwindcss";
 
+/* NafaPay brand tokens — mirrored 1:1 from the Flutter app
+ * (AchatTontineApp/lib/utils/thems/my_colors.dart) so the website,
+ * the mobile app, and the admin stay visually aligned.
+ * Primary red is the call-to-action; secondary navy is the trust /
+ * legal copy color; gradient runs from F47377 → E31E24. */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-brand: #E31E24;
+  --color-brand-light: #E1484D;
+  --color-brand-soft: #F47377;
+  --color-brand-pale: #FFF6F3;
+  --color-brand-deep: #B11118;
+
+  --color-secondary: #092D72;
+  --color-secondary-soft: #5E92C6;
+
+  --color-accent-yellow: #FDB623;
+  --color-accent-green: #54AC04;
+
+  --color-ink: #0A0A14;
+  --color-ink-soft: #414141;
+  --color-ink-muted: #6B7280;
+  --color-divider: #E5E7EB;
+  --color-surface: #FFFFFF;
+  --color-surface-tinted: #F8F8F8;
+
+  --background: #FFFFFF;
+  --foreground: var(--color-ink);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-brand: var(--color-brand);
+  --color-brand-light: var(--color-brand-light);
+  --color-brand-soft: var(--color-brand-soft);
+  --color-brand-pale: var(--color-brand-pale);
+  --color-brand-deep: var(--color-brand-deep);
+  --color-secondary: var(--color-secondary);
+  --color-secondary-soft: var(--color-secondary-soft);
+  --color-accent-yellow: var(--color-accent-yellow);
+  --color-accent-green: var(--color-accent-green);
+  --color-ink: var(--color-ink);
+  --color-ink-soft: var(--color-ink-soft);
+  --color-ink-muted: var(--color-ink-muted);
+  --color-divider: var(--color-divider);
+  --color-surface: var(--color-surface);
+  --color-surface-tinted: var(--color-surface-tinted);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, -apple-system, "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Reusable utility patterns */
+.brand-gradient {
+  background-image: linear-gradient(180deg, var(--color-brand-soft) 0%, var(--color-brand) 100%);
+}
+
+.brand-gradient-radial {
+  background-image: radial-gradient(
+    ellipse at top,
+    rgba(244, 115, 119, 0.18) 0%,
+    rgba(227, 30, 36, 0) 60%
+  );
+}
+
+.hero-grid {
+  background-image:
+    linear-gradient(rgba(9, 45, 114, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(9, 45, 114, 0.06) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 75%);
+}
+
+/* Legal-page typographic defaults — used by /privacy and /terms.
+ * Keeps the long-form French legal copy readable on mobile and
+ * still tasteful on wide screens. */
+.legal-prose {
+  color: var(--color-ink-soft);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+.legal-prose h2 {
+  color: var(--color-ink);
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.01em;
+}
+.legal-prose h3 {
+  color: var(--color-ink);
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 0.4rem;
+}
+.legal-prose p {
+  margin-bottom: 0.9rem;
+}
+.legal-prose ul {
+  list-style-type: disc;
+  padding-left: 1.25rem;
+  margin-bottom: 1rem;
+}
+.legal-prose ul li {
+  margin-bottom: 0.35rem;
+}
+.legal-prose strong {
+  color: var(--color-ink);
+}
+.legal-prose .callout {
+  border-left: 3px solid var(--color-brand);
+  background: var(--color-brand-pale);
+  padding: 0.85rem 1rem;
+  border-radius: 0 8px 8px 0;
+  margin: 1.25rem 0;
+  color: var(--color-ink);
 }
